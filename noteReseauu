@@ -45,3 +45,27 @@ semble d'adresses publiques. Que faire si vous ne disposez que d'une seule adres
 L'utilisation d'une table d'association entre les adresses privées et les adresses publiques n'est donc
 plus possible. Comment distinguer les réponses, s'il n'y a plus qu'une seule adresse publique ?
 Le PAT va utiliser les numéros de port
+
+
+
+On souhaite repartir sur un routeur sans la conguration précédente. Reprendre la copie du
+projet sauvegardé précédemment.
+2.2 Nous allons mettre en place le NAT/PAT sur le routeur 1
+1. On crée une ACL identiant les adresses qui doivent être transposées
+conf term
+access - l i s t 1 permit 192.168.0.0 0.0.0.255
+Ici les adresses du réseau 192.168.0.0/24 seront traduites
+2. l'ACL est liée à l'adresse publique
+ip nat inside source l i s t 1 interface e0 /1 overload
+ Les adresses privées sont celles dénies par l'ACL
+ L'adresse publique est celle associée à l'interface e0/1
+ Le mot clé overload spécie que les numéros de port seront utilisés pour gérer les
+traductions
+3. On dénit l'interface reliée au réseau privé
+interface e0 /0
+ip nat inside
+exit
+4. On dénit l'interface reliée au réseau public
+interface e0 /1
+ip nat outside
+end
