@@ -1,0 +1,47 @@
+Notes Réseau : 
+
+NAt : Network address Translation 
+
+192.168.1.1 : on évolue dans des réseaux privés.
+
+réseau  privé : réseau sur lequel les adresses ne sont pas routables à l'extérieur.
+
+dans un protocole ip on a des ip réservées : 10.0.0.0/8, 172.16.0.0/12 et 192.168.0.0
+
+Possible grâce au NAT : 
+
+
+Le routeur, connecté à la fois au réseau privé et à l'extérieur, se charge de faire correspondre
+les adresses IP privées avec des adresses IP publiques
+
+
+Ce routeur maintient une table d'associa-
+tion entre ces adresses. Lorsqu'un paquet provenant d'une machine du réseau privé et destiné à
+une machine externe arrive sur le routeur, celui-ci modie l'adresse source, en la remplaçant par
+l'adresse publique. Lorsque la réponse arrive, il fera l'opération inverse.
+
+ping : regarde sa table de routage
+
+NAT : Interface entre adresses privées et publiques (on le met sur R1 dans TP1)
+
+On commence tout d'abord par dénir un pool d'adresses publiques qui seront utilisées pour
+remplacer les adresses privées, lorsque les machines du réseau lana souhaiteront communi-
+quer avec l'extérieur. On choisit la plage d'adresses
+conf term
+ip nat pool lana 64.64.64.65 64.64.64.126 netmask 255.255.255.192
+
+On crée une ACL (Access Control List, comme lors du TP sur le pare-feu) identiant les
+adresses qui doivent être transposées
+access - l i s t 1 permit 192.168.0.0 0.0.0.255
+Ici les adresses du réseau 192.168.0.0/24 seront traduites
+3. Lier l'ACL au pool d'adresses
+ip nat inside source l i s t 1 pool lana
+
+
+Le NAT permet a la machine de ne pas être dispoé publiquement au reste du réseau (on vous voit pas) donc sécurité top.
+
+La conguration que nous venons de faire, traduit un ensemble d'adresses privées, vers un en-
+semble d'adresses publiques. Que faire si vous ne disposez que d'une seule adresse publique ?
+L'utilisation d'une table d'association entre les adresses privées et les adresses publiques n'est donc
+plus possible. Comment distinguer les réponses, s'il n'y a plus qu'une seule adresse publique ?
+Le PAT va utiliser les numéros de port
