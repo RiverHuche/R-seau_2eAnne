@@ -69,3 +69,20 @@ exit
 interface e0 /1
 ip nat outside
 end
+
+
+Réseau privé : réseau pas sensé être connu du monde extérieur
+
+NAT : accéder à l'extérieur depuis un réseau privé, les adresses ip des paquets qui sortent, ont tous la même ip publique
+
+dans table d'association (TP1) on aura portsource, ip privé qui sera associé à nouveau port source : PAT
+
+NAT : avantages : nos machines sont invisibles depuis l'extérieur, résolu le problème des ipv4, on peut avoir les même ip
+
+Les deux VLAN arrivent ils à communiquer ? Pourquoi ? Il n'y'a pas de passerelle
+
+Le switch qui recoit le premier message depuis un VLAN modifie alors avec dot1Q la tram ethernet et y met l'id de la VLAN.
+Cettre trame ethernet est modifiée seulement entre les liaisons des switch.
+
+
+e0/0.10 = interface VLAN10  interface VLAN20 = e0/0.20 
