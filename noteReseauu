@@ -86,3 +86,14 @@ Cettre trame ethernet est modifiée seulement entre les liaisons des switch.
 
 
 e0/0.10 = interface VLAN10  interface VLAN20 = e0/0.20 
+
+socket = utiliser la couche transport, chaque pc ouvre une socket, et les pc communiquent avec les socket (dans n'importe quelle langage)
+
+"0.0.0.0" car ça publiera la socket sur toutes les interfaces disponible de notre machine.
+
+BUFSIZE : ste de donnée maximale à recevoir.
+
+
+sock.recvfrom(BUFSIZE) = couple data et addresse (addresse du port de celui qui nous contacte)
+
+indispensable pour un serveur d'avoir un bind, le client est jamais contacté directment, en gros le bind est pas obligatoire
