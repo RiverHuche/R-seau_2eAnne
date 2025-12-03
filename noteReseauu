@@ -93,7 +93,26 @@ socket = utiliser la couche transport, chaque pc ouvre une socket, et les pc com
 
 BUFSIZE : ste de donnée maximale à recevoir.
 
+sock.bind() : associe la socket a l'ip et un port
+client initie l'échange, donc on a pas besoin de son bind, on s'en fiche qu'il soit connue
+client a pas de listen car il envoie juste
 
 sock.recvfrom(BUFSIZE) = couple data et addresse (addresse du port de celui qui nous contacte)
 
+sock.setsockopt() permet de réutiliser une socket sur une adresse qui a déjà ete
+
+sock.listen(int) va activer le serveur socket pour accepter des connexions = ce sera une socket qui se ra destinée à accueillir des connexions
+typique d'un Serveur et non d'un client, int spécifie le nombre de connexions qu'elle peut accepter (au bout de int dmd de connexions, on met en attente)
+
+sock.accept() : permet d'accepter une nouvelle connexion, = méthode bloquante, on attend d'une connexion qui arrive
+
+
+socket() = type par défaut c'est SOCK_STREAM = TCP : flux virtuel entre deux pc qui utilisent 
+
 indispensable pour un serveur d'avoir un bind, le client est jamais contacté directment, en gros le bind est pas obligatoire
+
+makefile() = 
+
+le syn ack se fait au moment du socket.connect du client car il est lié au socket.accept() du serveur
+
+une fois que le flux est établie (que le sockets communiquent), le client et serveur sont au même niveau et la connexion fonctionne de la même manière
