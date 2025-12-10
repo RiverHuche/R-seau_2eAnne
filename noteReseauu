@@ -116,3 +116,39 @@ makefile() =
 le syn ack se fait au moment du socket.connect du client car il est lié au socket.accept() du serveur
 
 une fois que le flux est établie (que le sockets communiquent), le client et serveur sont au même niveau et la connexion fonctionne de la même manière
+
+Connexions Internet actives (sans serveurs)
+Proto Recv-Q Send-Q Adresse locale          Adresse distante        Etat      
+tcp        0      0 or-iut-i201-f20.i:55820 24.224.186.35.bc.:https TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.i:49644 172.64.148.197:https    ESTABLISHED
+tcp        0      0 or-iut-i201-f20.i:36896 13.107.246.42:https     TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.i:53170 proxima.iut45.univ-:nfs TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.i:40794 or-iut-srv-ad1.iut:ldap ESTABLISHED
+tcp        0      0 or-iut-i201-f20.i:54320 93.243.107.34.bc.:https ESTABLISHED
+tcp        0      0 or-iut-i201-f20.i:49670 172.64.148.197:https    ESTABLISHED
+tcp        0      0 or-iut-i201-f20.i:32952 162.159.140.229:https   ESTABLISHED
+tcp        0      0 or-iut-i201-f20.i:33828 151.101.0.223:https     ESTABLISHED
+tcp        0      0 or-iut-i201-f20.i:45324 13.107.5.93:https       TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.i:35634 77.95.65.78:https       TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.iut:841 proxima.iut45.univ-:nfs TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.iut:758 proxima.iut45.univ-:nfs TIME_WAIT  
+tcp        0      0 or-iut-i201-f20.i:53740 par10s42-in-f3.1e:https ESTABLISHED
+
+netstat -uap (u pour udp, voir TP5)
+
+udp        0      0 0.0.0.0:5556            0.0.0.0:*                           86388/python3  (86388 = pid)
+
+tcp        0      0 0.0.0.0:freeciv         0.0.0.0:*               LISTEN      90946/python3       
+tcp        0      0 localhost:57680         localhost:freeciv       ESTABLISHED 90973/python3       
+tcp        0      0 localhost:freeciv       localhost:57680         ESTABLISHED 90946/python3 
+
+= LISTEN = socket en mode écoute soit la socketserveur, ESTABLISHED = les socket de la connexion, celle du milieu c'est le serveur car freeciv
+
+non possédés ne seront pas affichées, vous devez être root pour les voir toutes.)
+tcp        0      0 0.0.0.0:5557            0.0.0.0:*               LISTEN      92140/python3       
+tcp        0      0 or-iut-i201-f20.iu:5557 or-iut-i201-f21.i:58240 ESTABLISHED 92140/python3       
+tcp        1      0 localhost:36016         localhost:freeciv       CLOSE_WAIT  91537/python3 
+
+(jétais le serveur et hugo le client).
+
+getattr (regarder)
